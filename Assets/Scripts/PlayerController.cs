@@ -13,6 +13,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float movementForceInAir;
     [SerializeField] float airDragMultiplier = 0.95f;
     [SerializeField] float variableJumpHeightMultiplier = 0.5f;
+    [SerializeField] float wallHopForce;
+    [SerializeField] float wallJumpForce;
+    [SerializeField] Vector2 wallHopDirection;
+    [SerializeField] Vector2 wallJumpDirection;
+
 
 
     [Header("Surrounding Check Attributes")]
@@ -27,6 +32,7 @@ public class PlayerController : MonoBehaviour
 
     float movementInputDirection;
     bool isFacingRight = true;
+    int facingDirection = 1;
     bool isWalking;
     bool isGrounded;
     bool canJump;
@@ -43,6 +49,9 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         amountOfJumpsLeft = amountOfJumps;
+
+        wallHopDirection.Normalize();
+        wallJumpDirection.Normalize();
     }
 
     // Update is called once per frame
@@ -131,6 +140,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!isWallSliding)
         {
+            facingDirection *= -1;
             isFacingRight = !isFacingRight;
             transform.Rotate(0.0f, 180.0f, 0.0f);
         }
@@ -139,16 +149,31 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (canJump)
+        if (canJump && !isWallSliding)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             amountOfJumpsLeft--;
         }
+        else if (isWallSliding && movementInputDirection == 0 && canJump) // Wall hop
+        {
+            isWallSliding = false;
+            amountOfJumpsLeft--;
+            Vector2 forceToAdd = new Vector2(wallHopForce * wallHopDirection.x * -facingDirection, wallHopForce * wallHopDirection.y);
+            rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+        }
+        else if ((isWallSliding || isTouchingWall) && movementInputDirection != 0 && canJump) // Wall jump
+        {
+            isWallSliding = false;
+            amountOfJumpsLeft--;
+            Vector2 forceToAdd = new Vector2(wallJumpForce * wallJumpDirection.x * movementInputDirection, wallJumpForce * wallJumpDirection.y);
+            rb.AddForce(forceToAdd, ForceMode2D.Impulse);
+        }
+
     }
 
     private void CheckIfCanJump()
     {
-        if (isGrounded && rb.velocity.y <= 0)
+        if ((isGrounded && rb.velocity.y <= 0) || isWallSliding)
         {
             amountOfJumpsLeft = amountOfJumps;
         }
