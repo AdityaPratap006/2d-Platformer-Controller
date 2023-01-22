@@ -62148,11 +62148,11 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 4
+  m_GravityScale: 8
   m_Material: {fileID: 6200000, guid: 6507a0e1462ca40dbac65b8118c3c409, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &1573746260
 BoxCollider2D:
@@ -62192,22 +62192,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66b692341b96e46518742684ed0ce694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 10
-  jumpForce: 16
+  movementSpeed: 9
+  jumpForce: 20
   amountOfJumps: 2
-  wallSlidingSpeed: 2
-  movementForceInAir: 10
+  wallSlidingSpeed: 1
+  movementForceInAir: 50
   airDragMultiplier: 0.95
   variableJumpHeightMultiplier: 0.5
   wallHopForce: 10
-  wallJumpForce: 20
+  wallJumpForce: 30
   wallHopDirection: {x: 1, y: 0.5}
   wallJumpDirection: {x: 1, y: 2}
+  jumpTimerSet: 0.15
+  turnTimerSet: 0.1
+  wallJumpTimerSet: 0.7
   groundCheckRadius: 0.3
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  wallCheckDistance: 0.4
+  wallCheckDistance: 0.65
   groundCheck: {fileID: 658877479}
   wallCheck: {fileID: 1632228443}
 --- !u!95 &1573746262
