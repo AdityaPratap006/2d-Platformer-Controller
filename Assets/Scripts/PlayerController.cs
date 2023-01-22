@@ -20,6 +20,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float jumpTimerSet = 0.15f;
     [SerializeField] float turnTimerSet = 0.1f;
     [SerializeField] float wallJumpTimerSet = 0.5f;
+    [SerializeField] float dashTime;
+    [SerializeField] float dashSpeed;
+    [SerializeField] float distanceBetweenImages;
+    [SerializeField] float dashCoolDown;
 
 
     [Header("Surrounding Check Attributes")]
@@ -60,6 +64,11 @@ public class PlayerController : MonoBehaviour
     Vector2 ledgePosBottom;
     Vector2 ledgePos1;
     Vector2 ledgePos2;
+    bool isDashing;
+    float dashTimeLeft;
+    float lastImageXPosition;
+    float lastDash = -100f;
+
 
     Rigidbody2D rb;
     Animator anim;
@@ -85,6 +94,7 @@ public class PlayerController : MonoBehaviour
         CheckIfWallSliding();
         CheckJump();
         // CheckLedgeClimb(); // TODO: To be added after bugfixes in part 25
+        CheckDash();
     }
 
     private void FixedUpdate()
@@ -137,11 +147,19 @@ public class PlayerController : MonoBehaviour
             checkJumpMultiplier = false;
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * variableJumpHeightMultiplier);
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (Time.time >= (lastDash + dashCoolDown))
+            {
+                AttemptDash();
+            }
+        }
     }
 
     private void ApplyMovement()
     {
-        if (!isGrounded && !isWallSliding && movementInputDirection == 0)
+        if (!isGrounded && !isWallSliding && !isDashing && movementInputDirection == 0)
         {
             rb.velocity = new Vector2(rb.velocity.x * airDragMultiplier, rb.velocity.y);
         }
@@ -183,7 +201,7 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        if (!isWallSliding && !canClimbLedge && canFlip)
+        if (!isWallSliding && !canClimbLedge && canFlip && !isDashing)
         {
             facingDirection *= -1;
             isFacingRight = !isFacingRight;
@@ -353,6 +371,43 @@ public class PlayerController : MonoBehaviour
         canFlip = true;
         ledgeDetected = false;
         anim.SetBool("canClimbLedge", canClimbLedge);
+    }
+
+    private void AttemptDash()
+    {
+        isDashing = true;
+        dashTimeLeft = dashTime;
+        lastDash = Time.time;
+
+        PlayerAfterImagePool.Instance.GetFromPool();
+        lastImageXPosition = transform.position.x;
+    }
+
+    private void CheckDash()
+    {
+        if (isDashing)
+        {
+            if (dashTimeLeft > 0)
+            {
+                canMove = false;
+                canFlip = false;
+                rb.velocity = new Vector2(dashSpeed * facingDirection, rb.velocity.y);
+                dashTimeLeft -= Time.deltaTime;
+
+                if (Mathf.Abs(transform.position.x - lastImageXPosition) > distanceBetweenImages)
+                {
+                    PlayerAfterImagePool.Instance.GetFromPool();
+                    lastImageXPosition = transform.position.x;
+                }
+            }
+
+            if (dashTimeLeft <= 0 || isTouchingWall)
+            {
+                isDashing = false;
+                canMove = true;
+                canFlip = true;
+            }
+        }
     }
 
     private void OnDrawGizmos()
