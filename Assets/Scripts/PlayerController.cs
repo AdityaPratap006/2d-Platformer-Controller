@@ -420,6 +420,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public int GetFacingDirection()
+    {
+        return facingDirection;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);

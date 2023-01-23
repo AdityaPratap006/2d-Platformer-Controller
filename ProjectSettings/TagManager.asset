@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -12,9 +13,9 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
+  - Damageable
+  - Dead
+  - Player
   - 
   - 
   - 
@@ -46,6 +47,9 @@ TagManager:
     locked: 0
   - name: Decoration
     uniqueID: 2741704803
+    locked: 0
+  - name: Enemy
+    uniqueID: 1404425671
     locked: 0
   - name: Player
     uniqueID: 1606844829
