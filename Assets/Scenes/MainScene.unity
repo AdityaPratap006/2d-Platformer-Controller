@@ -60717,6 +60717,37 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &89258924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 89258925}
+  m_Layer: 0
+  m_Name: Attack1Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &89258925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89258924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.232, y: -0.126, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1573746258}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &251215178
 GameObject:
   m_ObjectHideFlags: 0
@@ -62132,6 +62163,7 @@ GameObject:
   - component: {fileID: 1573746259}
   - component: {fileID: 1573746262}
   - component: {fileID: 1573746261}
+  - component: {fileID: 1573746263}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -62207,6 +62239,7 @@ Transform:
   - {fileID: 1632228443}
   - {fileID: 251215179}
   - {fileID: 935644046}
+  - {fileID: 89258925}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62283,9 +62316,9 @@ MonoBehaviour:
   jumpTimerSet: 0.15
   turnTimerSet: 0.1
   wallJumpTimerSet: 0.7
-  dashTime: 0.3
+  dashTime: 0.2
   dashSpeed: 50
-  distanceBetweenImages: 0.05
+  distanceBetweenImages: 0.025
   dashCoolDown: 2.5
   groundCheckRadius: 0.3
   whatIsGround:
@@ -62317,6 +62350,26 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1573746263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1573746256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2620ed7c0c7be48068d384bb1068fbc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  combatEnabled: 1
+  inputTimer: 0.2
+  attack1Radius: 0.8
+  attack1Damage: 10
+  attack1HitBoxPos: {fileID: 89258925}
+  whatIsDamageable:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1632228442
 GameObject:
   m_ObjectHideFlags: 0
