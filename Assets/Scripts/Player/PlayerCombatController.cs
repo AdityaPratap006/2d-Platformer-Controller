@@ -17,9 +17,13 @@ public class PlayerCombatController : MonoBehaviour
     AttackDetails attackDetails = new AttackDetails();
 
     Animator anim;
+    PlayerController playerController;
+    PlayerStats playerStats;
 
     private void Start()
     {
+        playerController = GetComponent<PlayerController>();
+        playerStats = GetComponent<PlayerStats>();
         anim = GetComponent<Animator>();
         anim.SetBool("canAttack", combatEnabled);
     }
@@ -87,14 +91,29 @@ public class PlayerCombatController : MonoBehaviour
         anim.SetBool("attack1", false);
     }
 
+    private void Damage(AttackDetails attackDetails)
+    {
+        if (!playerController.GetDashStatus())
+        {
+            int direction;
+
+            playerStats.DecreaseHealth(attackDetails.damage);
+
+            if (attackDetails.positionX < transform.position.x)
+            {
+                direction = 1;
+            }
+            else
+            {
+                direction = -1;
+            }
+
+            playerController.Knockback(direction);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
     }
-}
-
-internal class AttackDetails
-{
-    public float damage;
-    public float positionX;
 }

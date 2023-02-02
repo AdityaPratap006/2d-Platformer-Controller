@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float dashSpeed;
     [SerializeField] float distanceBetweenImages;
     [SerializeField] float dashCoolDown;
+    [SerializeField] float knockbackDuration;
+    [SerializeField] Vector2 knockbackVelocity;
 
 
     [Header("Surrounding Check Attributes")]
@@ -68,8 +70,8 @@ public class PlayerController : MonoBehaviour
     float dashTimeLeft;
     float lastImageXPosition;
     float lastDash = -100f;
-
-
+    bool knockback;
+    float knockbackStartTime = Mathf.NegativeInfinity;
     Rigidbody2D rb;
     Animator anim;
 
@@ -95,6 +97,7 @@ public class PlayerController : MonoBehaviour
         CheckJump();
         // CheckLedgeClimb(); // TODO: To be added after bugfixes in part 25
         CheckDash();
+        CheckKnockback();
     }
 
     private void FixedUpdate()
@@ -159,11 +162,11 @@ public class PlayerController : MonoBehaviour
 
     private void ApplyMovement()
     {
-        if (!isGrounded && !isWallSliding && !isDashing && movementInputDirection == 0)
+        if (!isGrounded && !isWallSliding && !isDashing && movementInputDirection == 0 && !knockback)
         {
             rb.velocity = new Vector2(rb.velocity.x * airDragMultiplier, rb.velocity.y);
         }
-        else if (canMove)
+        else if (canMove && !knockback)
         {
             rb.velocity = new Vector2(movementSpeed * movementInputDirection, rb.velocity.y);
         }
@@ -211,7 +214,7 @@ public class PlayerController : MonoBehaviour
 
     private void Flip()
     {
-        if (!isWallSliding && !canClimbLedge && canFlip && !isDashing)
+        if (!isWallSliding && !canClimbLedge && canFlip && !isDashing && !knockback)
         {
             facingDirection *= -1;
             isFacingRight = !isFacingRight;
@@ -346,6 +349,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Knockback(int direction)
+    {
+        knockback = true;
+        knockbackStartTime = Time.time;
+        rb.velocity = new Vector2(knockbackVelocity.x * direction, knockbackVelocity.y);
+    }
+
+    private void CheckKnockback()
+    {
+        if (knockback && Time.time >= knockbackStartTime + knockbackDuration)
+        {
+            knockback = false;
+            rb.velocity = new Vector2(0.0f, rb.velocity.y);
+        }
+    }
+
     private void CheckLedgeClimb()
     {
         if (ledgeDetected && !canClimbLedge)
@@ -418,6 +437,11 @@ public class PlayerController : MonoBehaviour
                 canFlip = true;
             }
         }
+    }
+
+    public bool GetDashStatus()
+    {
+        return isDashing;
     }
 
     public int GetFacingDirection()
