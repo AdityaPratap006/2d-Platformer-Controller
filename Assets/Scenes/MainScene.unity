@@ -61514,7 +61514,7 @@ SpriteRenderer:
   m_SortingLayerID: 1404425671
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1309574319, guid: e1dc37043f3694297b39f9d6f5dc4eac, type: 3}
+  m_Sprite: {fileID: 1733500768, guid: 79269e4812a1d4a28a15efae65ddf52f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -61541,7 +61541,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 8
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 6507a0e1462ca40dbac65b8118c3c409, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -61602,7 +61602,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1192831441}
   m_Layer: 7
-  m_Name: GroundCheck
+  m_Name: LedgeCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72868,7 +72868,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2047913729}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.07, y: -5.99, z: 0}
+  m_LocalPosition: {x: -14.93, y: 9.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -72885,31 +72885,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 2047913729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d3020241e5b0410cbec9357ce14b8bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 688b84bc850ca4c43a79fdc50bcf37f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
-  groundCheckDistance: 0.6
-  wallCheckDistance: 0.1
-  groundCheck: {fileID: 1192831441}
   wallCheck: {fileID: 1532166978}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  maxHealth: 100
-  knockbackDuration: 0.1
-  knockbackVelocity: {x: 10, y: 5}
-  hitParticle: {fileID: 760862959960186233, guid: 846e399c663284e55940d9970a206ad0, type: 3}
-  deathChunkParticle: {fileID: 1817661264116196882, guid: f28ddb6a0a62a446dbd41806bb7b4c2e, type: 3}
-  deathBloodParticle: {fileID: 2164222909641187207, guid: 6d25a6e2df8f148c1879ed97f16f40ad, type: 3}
-  touchDamageCooldownTime: 0.2
-  touchDamageCheck: {fileID: 1282767798}
-  touchDamage: 10
-  touchDamageWidth: 1.7
-  touchDamageHeight: 1
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 512
+  ledgeCheck: {fileID: 1192831441}
+  entityData: {fileID: 11400000, guid: 67771c3f4129f42a3b97b40088fcfde7, type: 2}
+  idleStateData: {fileID: 11400000, guid: ab7797bbf1a064320b614d1daacd976a, type: 2}
+  moveStateData: {fileID: 11400000, guid: a810d087a75d6439a9a7003ce468aae8, type: 2}
 --- !u!1001 &4224983266268652824
 PrefabInstance:
   m_ObjectHideFlags: 0
