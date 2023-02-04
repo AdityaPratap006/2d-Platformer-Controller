@@ -6,6 +6,7 @@ public class Entity : MonoBehaviour
 {
     [SerializeField] Transform wallCheck;
     [SerializeField] Transform ledgeCheck;
+    [SerializeField] Transform playerCheck;
 
     public D_Entity entityData;
     public FiniteStateMachine stateMachine;
@@ -57,6 +58,16 @@ public class Entity : MonoBehaviour
     {
         facingDirection *= -1;
         aliveGO.transform.Rotate(0.0f, 180.0f, 0.0f);
+    }
+
+    public virtual bool CheckPlayerInMinAgroRange()
+    {
+        return Physics2D.Raycast(playerCheck.position, aliveGO.transform.right, entityData.minAgroDistance, entityData.whatIsPlayer);
+    }
+
+    public virtual bool CheckPlayerInMaxAgroRange()
+    {
+        return Physics2D.Raycast(playerCheck.position, aliveGO.transform.right, entityData.maxAgroDistance, entityData.whatIsPlayer);
     }
 
     public virtual void OnDrawGizmos()
