@@ -14,7 +14,7 @@ public class PlayerCombatController : MonoBehaviour
 
     bool gotInput, isAttacking, isFirstAttack;
     float lastInputTime = Mathf.NegativeInfinity;
-    AttackDetails attackDetails = new AttackDetails();
+    AttackDetails attackDetails;
 
     Animator anim;
     PlayerController playerController;
@@ -74,8 +74,8 @@ public class PlayerCombatController : MonoBehaviour
     {
         Collider2D[] detectedObjects = Physics2D.OverlapCircleAll(attack1HitBoxPos.position, attack1Radius, whatIsDamageable);
 
-        attackDetails.damage = attack1Damage;
-        attackDetails.positionX = transform.position.x;
+        attackDetails.damageAmount = attack1Damage;
+        attackDetails.position = transform.position;
 
         foreach (Collider2D collider in detectedObjects)
         {
@@ -97,9 +97,9 @@ public class PlayerCombatController : MonoBehaviour
         {
             int direction;
 
-            playerStats.DecreaseHealth(attackDetails.damage);
+            playerStats.DecreaseHealth(attackDetails.damageAmount);
 
-            if (attackDetails.positionX < transform.position.x)
+            if (attackDetails.position.x < transform.position.x)
             {
                 direction = 1;
             }
@@ -114,6 +114,6 @@ public class PlayerCombatController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
+        // Gizmos.DrawWireSphere(attack1HitBoxPos.position, attack1Radius);
     }
 }

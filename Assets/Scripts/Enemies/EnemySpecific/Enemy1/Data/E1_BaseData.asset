@@ -17,8 +17,9 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 64
-  minAgroDistance: 4
+  minAgroDistance: 7
   maxAgroDistance: 8
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 512
+  closeRangeActionDistance: 1.75

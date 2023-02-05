@@ -44,7 +44,7 @@ public class BasicEnemyController : MonoBehaviour
     int damageDirection;
     Vector2 touchDamageBottomLeft;
     Vector2 touchDamageTopRight;
-    AttackDetails attackDetails = new AttackDetails();
+    AttackDetails attackDetails;
     float lastTouchDamageTime = Mathf.NegativeInfinity;
 
 
@@ -193,11 +193,11 @@ public class BasicEnemyController : MonoBehaviour
 
     private void Damage(AttackDetails attackDetails)
     {
-        currentHealth -= attackDetails.damage;
+        currentHealth -= attackDetails.damageAmount;
 
         Instantiate(hitParticle, aliveGO.transform.position, Quaternion.Euler(0.0f, 0.0f, Random.Range(0.0f, 360.0f)));
 
-        if (attackDetails.positionX > aliveGO.transform.position.x)
+        if (attackDetails.position.x > aliveGO.transform.position.x)
         {
             damageDirection = -1;
         }
@@ -228,8 +228,8 @@ public class BasicEnemyController : MonoBehaviour
             if (hit != null)
             {
                 lastTouchDamageTime = Time.time;
-                attackDetails.damage = touchDamage;
-                attackDetails.positionX = aliveGO.transform.position.x;
+                attackDetails.damageAmount = touchDamage;
+                attackDetails.position = aliveGO.transform.position;
                 hit.SendMessage("Damage", attackDetails);
             }
         }

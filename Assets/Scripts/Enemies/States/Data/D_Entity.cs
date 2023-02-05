@@ -5,14 +5,17 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newEntityData", menuName = "Data/Entity Data/Base Data")]
 public class D_Entity : ScriptableObject
 {
-    [Header("Wall/Ledge detection")]
+    [Header("Wall/Ledge Detection Attributes")]
     public float wallCheckDistance = 0.2f;
     public float ledgeCheckDistance = 0.4f;
     public LayerMask whatIsGround;
 
-    [Header("Player detection")]
+    [Header("Player Detection Attributes")]
     public float minAgroDistance = 3f;
     public float maxAgroDistance = 5f;
     public LayerMask whatIsPlayer;
+
+    [Header("Attack Action Attributes")]
+    public float closeRangeActionDistance = 1f;
 
 }
