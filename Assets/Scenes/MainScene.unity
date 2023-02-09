@@ -61504,6 +61504,7 @@ Transform:
   - {fileID: 1282767798}
   - {fileID: 1157535470}
   - {fileID: 225207505}
+  - {fileID: 2048005215}
   m_Father: {fileID: 2047913730}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -61547,7 +61548,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1404425671
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1733500768, guid: 79269e4812a1d4a28a15efae65ddf52f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -72968,6 +72969,7 @@ MonoBehaviour:
   wallCheck: {fileID: 1532166978}
   ledgeCheck: {fileID: 1192831441}
   playerCheck: {fileID: 1157535470}
+  groundCheck: {fileID: 2048005215}
   entityData: {fileID: 11400000, guid: 67771c3f4129f42a3b97b40088fcfde7, type: 2}
   idleStateData: {fileID: 11400000, guid: ab7797bbf1a064320b614d1daacd976a, type: 2}
   moveStateData: {fileID: 11400000, guid: a810d087a75d6439a9a7003ce468aae8, type: 2}
@@ -72976,6 +72978,39 @@ MonoBehaviour:
   lookForPlayerStateData: {fileID: 11400000, guid: acf071f7a79b94bb69a40e922e714cee, type: 2}
   meleeAttackStateData: {fileID: 11400000, guid: c77f0e2470d594275872ecd08b9fb709, type: 2}
   meleeAttackPosition: {fileID: 225207505}
+  stunStateData: {fileID: 11400000, guid: f39fe083b0a4e45a09a60fd583967b5b, type: 2}
+  deadStateData: {fileID: 11400000, guid: b978a42f366de497ab5b7853414bfd28, type: 2}
+--- !u!1 &2048005214
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2048005215}
+  m_Layer: 7
+  m_Name: GroundCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2048005215
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2048005214}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.93, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084156643}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &4224983266268652824
 PrefabInstance:
   m_ObjectHideFlags: 0
