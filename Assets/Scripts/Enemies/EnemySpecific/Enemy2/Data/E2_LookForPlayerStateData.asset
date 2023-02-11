@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18d8ee45ce2324afbab7fb9ef6d124b2, type: 3}
-  m_Name: E1_ChargeStateData
+  m_Script: {fileID: 11500000, guid: 8ab4fd4c4eb354efdba5a48be5dfb014, type: 3}
+  m_Name: E2_LookForPlayerStateData
   m_EditorClassIdentifier: 
-  chargeSpeed: 6
-  chargeTime: 1.5
+  amountOfTurns: 2
+  timeBetweenTurns: 0.75
